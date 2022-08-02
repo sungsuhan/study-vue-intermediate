@@ -64,7 +64,7 @@ export default {
           drinkId: '4',
           drinkName: '일품진로',
           price: 1,
-          qty: 2
+          qty: 4
         }
       ]
     }
