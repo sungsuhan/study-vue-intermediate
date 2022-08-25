@@ -4,14 +4,24 @@
    <span class="addContainer" v-on:click="addTodo">
      <i class="fa-solid fa-plus"></i>
    </span>
+   <modal v-if="showModal" @close="showModal = false">
+     <h3 slot="header">
+       경고!
+       <i class="closeModalBtn fa-solid fa-calendar-xmark" @click="showModal = false"></i>
+     </h3>
+     <div slot="body">일정을 입력하세요.</div>
+   </modal>
  </div>
 </template>
 
 <script>
+import AlertModal from "@/components/common/AlertModal";
+
 export default {
   data: function () {
     return {
-      newTodoItem: ""
+      newTodoItem: "",
+      showModal: false
     }
   },
   methods: {
@@ -19,11 +29,16 @@ export default {
       if (this.newTodoItem !== '') {
         this.$emit('addTodoItem', this.newTodoItem);
         this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput: function () {
       this.newTodoItem = "";
     }
+  },
+  components: {
+    Modal: AlertModal
   }
 }
 </script>
@@ -53,5 +68,7 @@ input:focus {
   color: black;
   vertical-align: middle;
 }
-
+.closeModalBtn {
+  color: #42b983;
+}
 </style>
